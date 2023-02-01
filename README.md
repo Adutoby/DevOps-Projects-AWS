@@ -1,2 +1,2 @@
-# DevOps-Development-Projects
-DevOps Developmet project documentation using AWS
+# DevOps-Development-Projects (AWS)
+This repository contains DevOps projects completed and documented by me while practicing $ horning my Cloud engineering (AWS-DevOps) skills.
