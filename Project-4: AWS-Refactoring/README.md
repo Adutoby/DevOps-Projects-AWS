@@ -3,8 +3,7 @@
 This strategy detail moving an application to the cloud and modifing its architecture to take full advantage of cloud-native features on AWS. Thereby improving Performance, agility and scalability while it reduces operational overhead and ensure business continuity.
 
 ## DevOps Project-4
-Project Source: DevOps Project by Imran Teli
-GitHub repo: Re-Architecture Web App on AWS Cloud[Cloud Native]
+Project Source: DevOps Project by (Imran Teli)[https://www.udemy.com/course/devopsprojects/learn/lecture/23897820#overview]
 
 ## Pre-requisites:
 - AWS Beanstalk
@@ -102,7 +101,7 @@ This will be used in our application properties configuration file. (It will tak
 
 ![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-4:%20AWS-Refactoring/Images/RDSdatabase.png)
 
-## Step 3: Create ElasticCache
+## Create ElasticCache
 
 Search for Amazon ElasticCache in your AWS console, and proceed to 
 
