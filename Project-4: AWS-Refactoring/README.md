@@ -2,7 +2,7 @@
 
 This strategy detail moving an application to the cloud and modifing its architecture to take full advantage of cloud-native features on AWS. Thereby improving Performance, agility and scalability while it reduces operational overhead and ensure business continuity.
 
-## DevOps Project-3
+## DevOps Project-4
 Project Source: DevOps Project by Imran Teli
 GitHub repo: Re-Architecture Web App on AWS Cloud[Cloud Native]
 
@@ -153,7 +153,7 @@ Search for Amazon MQ service on the AWS console, click on get started and create
 
 **`Ensure to keep a note of the username and password of your services.`**
 
-## Step-5: DB Initialization
+## Step 5: DB Initialization
 
 Copy the  RDS instance endpoint.
 
@@ -201,7 +201,7 @@ To initiate our database we need to clone our source code into the instance. 
 
 ![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-4:%20AWS-Refactoring/Images/initializedb.png)
 
-## Step 5: Create an Elastic Beanstalk Environment
+## Step 6: Create an Elastic Beanstalk Environment
 
 With the backend services all ready, copy all of  their endpoints. This information will be used in our application.properties file.
 
@@ -261,7 +261,7 @@ To do this, navigate to the Elastic Beanstalk service in the AWS console, under 
 
 ![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-4:%20AWS-Refactoring/Images/ELB-App-ssl-update.png)
 
-## Step 6: Build and Deploy Artifact
+## Step 7: Build and Deploy Artifact
 
 Update the application.properties file with the correct endpoints and username and password. 
 This is found in the src/main/resources directory of the source code cloned to your local system.
@@ -276,7 +276,7 @@ Run **`mvn install`** command to build the artifact.
 ![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-4:%20AWS-Refactoring/Images/mvnistall.png)
 
 
-## Step 7: Upload Artifact to Elastic Beanstalk
+## - Upload Artifact to Elastic Beanstalk
 
 Navigate back to the AWS console Elastic Beanstalk, click on the Application versions, and select the Upload button on the top right corner to upload the artifact from your local. It will automatically upload the artifact to an S3 bucket created by Elastic Beanstalk.
 
