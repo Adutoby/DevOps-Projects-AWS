@@ -3,9 +3,11 @@
 This strategy detail moving an application to the cloud and modifing its architecture to take full advantage of cloud-native features on AWS. Thereby improving Performance, agility and scalability while it reduces operational overhead and ensure business continuity.
 
 ## DevOps Project-4
+
 Project Source: DevOps Project by [Imran Teli](https://www.udemy.com/course/devopsprojects/learn/lecture/23897820#overview)
 
-## Pre-requisites:
+## Pre-requisites
+
 - AWS Beanstalk
 - Amazon Simple Storage Service (S3)
 - Amazon Relational Database System (RDS)
@@ -16,6 +18,7 @@ Project Source: DevOps Project by [Imran Teli](https://www.udemy.com/course/devo
 - Amazon Cloudwatch
 
 ### Other Tools
+
 - jdk8
 - maven
 
@@ -53,14 +56,14 @@ login via SSH into the instance.
 
 ## Step 2: Create Security Group for ElastiCache, RDS and ActiveMQ (Backend Services)
 
-Create a Security Group with the name vprofile-backend-SG to allow traffic on port 22 from its IP address. 
+Create a Security Group with the name vprofile-backend-SG to allow traffic on port 22 from its IP address.
 Once created, edit inbound rules to allow all traffic from its own  security group that was just created.
 
 ## Step 3: Create Backend Services ( RDS Database)
 
-Navigate to RDS on the AWS console, 
+Navigate to RDS on the AWS console,
 
-###- Create Subnet Group:
+### - Create Subnet Group:
 
 Using  these properties, create a  Subnet Groups
 
@@ -70,7 +73,7 @@ Using  these properties, create a  Subnet Groups
 
 ### - Create a Parameter Group
 
-Create a parameter group that will be used with our RDS instance. we will be able to update the parameter of our RDS instance. 
+Create a parameter group that will be used with our RDS instance. we will be able to update the parameter of our RDS instance.
 
     Parameter group family: mysql5.7
     Type: DB Parameter Group
@@ -95,7 +98,7 @@ Create RDS instance with below properties:
     Additional Configuration
     Initial DB Name: accounts
     Keep or add additional configuration according to your preference
-    
+
 Click the create database button. Click View credential details and Ensure to take note of the auto-generated db password.
 This will be used in our application properties configuration file. (It will take some time for the RDS database to be created)
 
@@ -103,7 +106,7 @@ This will be used in our application properties configuration file. (It will tak
 
 ## Create ElasticCache
 
-Search for Amazon ElasticCache in your AWS console, and proceed to 
+Search for Amazon ElasticCache in your AWS console, and proceed to
 
 ### - Create a Parameter Group
 
@@ -113,14 +116,14 @@ Creating parameter group for  ElastiCache instance
     Description: vprofile-memcached-para-grp
     Family: memcached1.4
 
+### - Create Subnet Group
 
-### - Create Subnet Group:
 Creating  Subnet Groups with the below properties:
 
     Name: vprofile-memcached-sub-grp
     AZ: Select All
     Subnet: Select All
-    
+
 ### - Create Memcached Cluster
 
 On the dashboard, click Get Started, the drop down on Create cluster and then click the Memcached clusters and enter your details (note it will also take some time to create)
@@ -167,25 +170,25 @@ Navigate to Instance and create an EC2 instance that will be used to initialize 
     Keypair: vprofile-prod-key
 
  Userdata:
- 
+
     #! /bin/bash
     apt update -y
     apt install mysql-client -y
 
-SSH into MySQL-client instance. 
+SSH into MySQL-client instance.
 
 ![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-4:%20AWS-Refactoring/Images/sshintomysqlclient.png)
 
 Check mysql version is installed with **`mysql -v`**
-Update vprofile-backend-SG ie, edit Inbound rule to allow connection on port 3306 from mysql-client-SG we created for the instance. 
-Log in to the database, and connect with the below scripts. Ensure to use your RDS endpoint, username, and password credentials. 
+Update vprofile-backend-SG ie, edit Inbound rule to allow connection on port 3306 from mysql-client-SG we created for the instance.
+Log in to the database, and connect with the below scripts. Ensure to use your RDS endpoint, username, and password credentials.
 
     mysql -h vprofile-rds-mysql.cl4gecxfj3xt.us-east-1.rds.amazonaws.com -u admin -p<db_password>
     mysql> show databases;
 
 ![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-4:%20AWS-Refactoring/Images/RDSlogincheck.png)
 
-To initiate our database we need to clone our source code into the instance. 
+To initiate our database we need to clone our source code into the instance.
 
     git clone https://github.com/rumeysakdogan/vprofileproject-all.git
     cd vprofileproject-all
@@ -211,8 +214,8 @@ With the backend services all ready, copy all of  their endpoints. This informat
 ### - Creating our  Application
 
 AWS documentation details what Elastic Beanstalk is and you can read more [HERE](https://aws.amazon.com/elasticbeanstalk/)
-Search for Amazon Elastic Beanstalk on your AWS console to create one. 
-We will choose Tomcat as the platform since we are running our application on Tomcat 
+Search for Amazon Elastic Beanstalk on your AWS console to create one.
+We will choose Tomcat as the platform since we are running our application on Tomcat
 
     Name: vprofile-java-app
     Platform: Tomcat
@@ -251,7 +254,7 @@ For our application instances created by BeanStalk to communicate with Backend s
 
 ![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-4:%20AWS-Refactoring/Images/ELB-SG-configuration.png)
 
-Next, we need to configure the application environment load balancer. 
+Next, we need to configure the application environment load balancer.
 To do this, navigate to the Elastic Beanstalk service in the AWS console, under the app environment, click Configuration and make changes to the Listener and processes section, and apply them.
 
   Add to Listener HTTPS port 443 with SSL cert
@@ -262,18 +265,17 @@ To do this, navigate to the Elastic Beanstalk service in the AWS console, under 
 
 ## Step 7: Build and Deploy Artifact
 
-Update the application.properties file with the correct endpoints and username and password. 
+Update the application.properties file with the correct endpoints and username and password.
 This is found in the src/main/resources directory of the source code cloned to your local system.
 
     vim src/main/resources/application.properties
 
 ![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-4:%20AWS-Refactoring/Images/Editapp-properties.png)
 
-CD back to the  root directory of the project where the **`pom.xml`** file is located. 
+CD back to the  root directory of the project where the **`pom.xml`** file is located.
 Run **`mvn install`** command to build the artifact.
 
 ![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-4:%20AWS-Refactoring/Images/mvnistall.png)
-
 
 ## - Upload Artifact to Elastic Beanstalk
 
@@ -322,7 +324,7 @@ Validate Vprofile Homepage
 
 ## Step 9: Create Cloudfront Distribution for CDN
 
-Cloudfront is a Content Delivery Network service of AWS. It uses for global content distribution using Edge Locations around the world giving an excellent user experience with top-notch performance and very low latency. 
+Cloudfront is a Content Delivery Network service of AWS. It uses for global content distribution using Edge Locations around the world giving an excellent user experience with top-notch performance and very low latency.
 
 Attach Cloudfront to Beanstalk
 ![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-4:%20AWS-Refactoring/Images/Cloudfrontsetup.png)
@@ -334,6 +336,8 @@ Revalidate the application (URL) using another browser, and log in to check that
 ![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-4:%20AWS-Refactoring/Images/httpslongincheck.png)
 
 ## Finally Step 10: Clean-up
+
 Ensure to **delete all resources** created throughout the project to avoid charges.
 
 Connect with me on [LinkedIn](https://www.linkedin.com/in/oluwatobiloba-adu/)
+  
