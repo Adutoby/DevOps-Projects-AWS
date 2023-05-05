@@ -22,32 +22,24 @@ Project Source: DevOps Project by [Imran Teli](https://www.udemy.com/course/devo
 
 ## Flow of Execution
 
- - Login to AWS Account.
- - Create Your Key Pair.
- - Create Security Group.
- 
-     Jenkins, Nexus and Sonarqube
-    
- - Create EC2 Instances with User-data.
- 
-    Jenkins, Nexus and Sonarqube
- - Post Installation.
- 
-    a. Jenkins setup and Plugin
-    
-    b. Nexus Setup and repository setup
-    
-    c. Sonarqube login test
- - Git.
- 
-    a. Create a github repository and migration code
-    
-    b. integrate github repo with Vs-code and test it 
- - Build Job with Nexus integration.
- - Github Webhooks.
- - Sonarqube Server integration stage.
- - Nexus Artifact upload stage.
- - Slack Notification.
+1. Login to AWS Account.
+2. Create Your Key Pair.
+3. Create Security Group.
+- Jenkins, Nexus and Sonarqube
+4. Create EC2 Instances with User-data.
+- Jenkins, Nexus and Sonarqube
+5. Post Installation.
+- Jenkins setup and Plugin
+- Nexus Setup and repository setup
+- Sonarqube login test
+6. Git.
+- Create a github repository and migration code
+- integrate github repo with Vs-code and test it 
+7. Build Job with Nexus integration.
+8. Github Webhooks.
+9. Sonarqube Server integration stage.
+10. Nexus Artifact upload stage.
+11. Slack Notification.
  
 ## Step1 and 2: Log into your AWS account and  Create Key Pair
 
@@ -96,7 +88,7 @@ Create Jenkins- Server 
       KeyPair: awskeypair
       Additional Details: copy and paste below jenkins-setup script
       
-Jenkins Userdata script
+**Jenkins Userdata script**
 
       #!/bin/bash
       sudo apt update -y
@@ -123,7 +115,7 @@ Create Nexus-server lunching an Amazon Linux-2 instance on AWS
       KeyPair: awskeypair (ensure to use your created keypair here)
       Additional Details: copy and paste below Nexus-setup script
       
-Nexus Userdata script
+**Nexus Userdata script**
 
       #!/bin/bash
       sudo yum install java-1.8.0-openjdk.x86_64 wget -y   
@@ -169,7 +161,7 @@ Create sonarqube-server lunched with an ubuntu 18.04 AMI 
       KeyPair: awskeypair (ensure to use your created keypair here)
       Additional Details: copy and paste below Sonarqube-setup script
       
-Sonarqube Userdata script
+**Sonarqube Userdata script**
 
       #!/bin/bash
       sudo cp /etc/sysctl.conf /root/sysctl.conf_backup
@@ -375,8 +367,8 @@ Create a private repository in the Github for the project, then clone content fr
 
 We will require some dependencies to build our job on Jenkins server. This include JDK8 and Maven.
 
-Navigate tp Manage Jenkins in your Jenkins UI, then to Global Tool Configuration. Under JDK, select Add JDK > Name it, 
-uncheck install Automatically and under JAVA HOME provide the path for JDK-8.(this is discussed below)
+Navigate tp Manage Jenkins in your Jenkins UI, then to Global Tool Configuration. Under **JDK**, select **`Add JDK`** > Name it, 
+uncheck install Automatically and under **JAVA HOME** provide the path for JDK-8.(this is discussed below)
 
 We also need jdk8 installed and to do that we will need to ssh into our Jenkins server (instance) and run the following commands 
 
@@ -391,7 +383,7 @@ Paste **`/usr/lib/jvm/java-1.8.0-openjdk-amd64`** in the path section to install
 Enter **MAVEN3** and leave rest as they are and  Save the configuration
 
 We also need to add Nexus credentials to be able  upload our artifacts, 
-Therefor we will to add Nexus login credentials to Jenkins by navigating to Manage Jenkins > Manage credentials > Global > Add Credentials used below information for the configuration.
+Therefor we will to add Nexus login credentials to Jenkins by navigating to **Manage Jenkins > Manage credentials > Global > Add Credentials used below information for the configuration.**
 
       username: admin
       password: enter the password you setup for nexus
@@ -553,6 +545,7 @@ Next we add sonar token to global credentials section. To do this navigate to th
       description: sonartoken
       
 To add sonarQube code for our pipeline and commit/push changes to GitHub.
+
       pipeline {
           agent any
           tools {
@@ -655,7 +648,8 @@ Update the Jenkinsfile by adding a new stage named "Quality Gate" to the pipelin
                   }
               }
 
-Run the job and Build was successful!
+Run the job. 
+Build was successful!!
 
 ![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-5:Continues_Integration_Using_Jenkins_Nexus_Sonarqube_and_Slack/Images/Qualitygatebuildsuccessful.png)
 
