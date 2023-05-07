@@ -1,7 +1,7 @@
 # Automated Setup of A Multi Tier Web App
 ## Vprofile-Project2: 
 
-![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/vprofile-project2/images/Architectdaigram1.png)
+![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-2:%20Automated%20Multi-teir%20Web%20App%20Setup/images/Architectdaigram1.png)
 
 # Prerequisite
 
@@ -13,7 +13,7 @@ To complete this project you should have your lab set-up with the appropriate to
 
 # Project Architecture
 
-![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/vprofile-project2/images/Architectdaigram2.png)
+![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-2:%20Automated%20Multi-teir%20Web%20App%20Setup/images/Architectdaigram2.png)
 
 This is a follow up project on the my last project: Multi Tier Web Application Stack Setup Locally but this time we will be automating 
 the entire process with bash scripts and vagrant to bring up our VMs and provision the services with just one command.
@@ -225,7 +225,7 @@ Now that we have all the services completely scripted we will proceed to ensure 
 Our vagrantfile should look like below. Note that the order explicitly creates the the DB first, then Memcached, followed by RabbitMQ, 
 Tomcat and finally our web app, nginx. They are all contained in the repo.
 
-![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/vprofile-project2/images/vagrantfile.png)
+![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-2:%20Automated%20Multi-teir%20Web%20App%20Setup/images/vagrantfile.png)
 
 Edit `application.properties` File
 
@@ -267,13 +267,13 @@ Then run the vagrant up command
     cd vprofile-project/vagrant/Automated_provisioning
     vagrant up
 
-![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/vprofile-project2/images/VMs%20up.png)
+![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-2:%20Automated%20Multi-teir%20Web%20App%20Setup/images/VMs%20up.png)
 
 Observe in your oracle virtualbox UI that the VMs are being created by vagrant in the order we specified in the vagrantfile, 
 and the bash script are executed in various VMs immediated they are up, running and stable. (Bootstrap). 
 *Note: this will take sometime depending on your internet speed*.
 
-![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/vprofile-project2/images/VMprovisioned.png)
+![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-2:%20Automated%20Multi-teir%20Web%20App%20Setup/images/VMprovisioned.png)
 
 # Application Validation
 
@@ -283,27 +283,27 @@ the name assigne to the web app) in our case `web01`. This should open the login
 
 Type; http://web01
 
-![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/vprofile-project2/images/loginpage.png)
+![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-2:%20Automated%20Multi-teir%20Web%20App%20Setup/images/loginpage.png)
 
 Next check that Frontend(via nginx) communicate with Backend server and services. 
 To do this; Type user name `admin_vp` as login details for both username and password. 
 if you are successful then that validation is complete.
 
-![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/vprofile-project2/images/tomcat%20validated.png)
+![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-2:%20Automated%20Multi-teir%20Web%20App%20Setup/images/tomcat%20validated.png)
 
 Next validate RabbitMq our queing agent service is also provisioned correctly and working by clicking on the Rabbitmq button. 
 You should have below display. This indicate that there is connection and communication between `app01` and `rmq01` servers.
 
-![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/vprofile-project2/images/Rabbitmq.png)
+![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-2:%20Automated%20Multi-teir%20Web%20App%20Setup/images/Rabbitmq.png)
 
 Now lets check DB and memcache services . Go back to home page and Click on ALL USER button, them select any user of your choice. 
 his should return data from the DB and insert in Cache the first time you access that information.
 
-![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/vprofile-project2/images/DBvalidation.png)
+![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-2:%20Automated%20Multi-teir%20Web%20App%20Setup/images/DBvalidation.png)
 
 Try to access the same information again and you will see it returned from cache instead of DB. Meaning `mc01 server` is provisioned ok and working
 
-![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/vprofile-project2/images/cachevalidation.png)
+![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-2:%20Automated%20Multi-teir%20Web%20App%20Setup/images/cachevalidation.png)
 
 We have created a multi stack App automatically through vagrant with bash scripts successfully and validated its functionlity. 
 With this we can re-create the application easily with just one command any time we want. 
