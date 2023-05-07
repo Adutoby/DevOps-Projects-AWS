@@ -26,7 +26,7 @@ The cloud platform offers lots of benefits. Read more on [Cloud Computing Setup]
 
 # Project Architecture on AWS
 
-![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-%203:%20Lift%20And%20Shift%20Web%20Application%20to%20AWS/images/project%20architecture.png)
+![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-3:%20Lift%20And%20Shift%20Web%20Application%20to%20AWS/images/project%20architecturenew.png)
 
 picture credit: rumeysakdogan
 
@@ -53,18 +53,18 @@ Create a certificate on Amazon Certificate Manager and validate it with the Doma
 Navigate to the EC2 section from the console page and create a security group for our load balancer where we allow the inbound rules for HTTP (port 80)
 and HTTPS (port 443) on IPV4 and IPV6
 
-![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-%203:%20Lift%20And%20Shift%20Web%20Application%20to%20AWS/images/vprofile-ELB-SG.png)
+![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-3:%20Lift%20And%20Shift%20Web%20Application%20to%20AWS/images/vprofile-ELB-SG.png)
 
 Create a security for our Tomcat instances and allow inbound rule on port 8080 from load balancer security group
 
-![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-%203:%20Lift%20And%20Shift%20Web%20Application%20to%20AWS/images/tomcatinstancesSG.png)
+![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-3:%20Lift%20And%20Shift%20Web%20Application%20to%20AWS/images/tomcatinstancesSG.png)
 
 Create security group for our back-end services rabbitMQ, Memcached and MySQL and add inbound rule for MySQL (port 3306), memcached (port 11211), 
 RabbitMQ (port 5672) and allow from only tomcat security group. We will also allow all traffic from its security group after we have created the 
 aforementioned security rules for the back-end services. To be able to log into the server port 22 should be configured from the instance IP 
 addresses of the back-end instances once provisioned.
 
-![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-%203:%20Lift%20And%20Shift%20Web%20Application%20to%20AWS/images/backendservicesSG.png)
+![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-3:%20Lift%20And%20Shift%20Web%20Application%20to%20AWS/images/backendservicesSG.png)
 
 # Step 3
 
@@ -121,9 +121,9 @@ Once our instance is ready, SSH into the server and check if the script executed
 follow the commands, change to root user, abd use the curl to check the user-data script and the sytemctl status mariadb to check 
 the running state of the database.
 
-![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-%203:%20Lift%20And%20Shift%20Web%20Application%20to%20AWS/images/db01login.png)
+![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-3:%20Lift%20And%20Shift%20Web%20Application%20to%20AWS/images/db01login.png)
 
-![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-%203:%20Lift%20And%20Shift%20Web%20Application%20to%20AWS/images/db01statusvalidation.png)
+![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-3:%20Lift%20And%20Shift%20Web%20Application%20to%20AWS/images/db01statusvalidation.png)
 
     ssh -i awskeypair.pem centos@<public_ip_of_instance>
     sudo -i
@@ -150,7 +150,7 @@ Next, launch another Centos 7 EC2 instance for memchache using the memcache user
 
 SSH into the server and check if user data script was executed properly and check status of memcache service if it is listening on port 11211.
 
-![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-%203:%20Lift%20And%20Shift%20Web%20Application%20to%20AWS/images/memcacheloginstatusvalidation.png)
+![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-3:%20Lift%20And%20Shift%20Web%20Application%20to%20AWS/images/memcacheloginstatusvalidation.png)
 
 Create another EC@ instance for RabbitMQ using rabbitmq.sh script as user data
 
@@ -190,13 +190,13 @@ SSH into the server and check if user data script was provisioned properly, also
 
 *Give sometime for the services to be provisioned properly.*
 
-![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-%203:%20Lift%20And%20Shift%20Web%20Application%20to%20AWS/images/rabbitmqlogin.png)
+![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-3:%20Lift%20And%20Shift%20Web%20Application%20to%20AWS/images/rabbitmqlogin.png)
 
-![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-%203:%20Lift%20And%20Shift%20Web%20Application%20to%20AWS/images/rabbitmqstatuscheck.png)
+![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-3:%20Lift%20And%20Shift%20Web%20Application%20to%20AWS/images/rabbitmqstatuscheck.png)
 
 Validated all 3 instances are up and running on the EC2 Console
 
-![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-%203:%20Lift%20And%20Shift%20Web%20Application%20to%20AWS/images/3instancerunningverification.png)
+![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-3:%20Lift%20And%20Shift%20Web%20Application%20to%20AWS/images/3instancerunningverification.png)
 
 # Step 4
 
@@ -204,7 +204,7 @@ Navigate to Route 53,  click Create hosted zone to create private hosted zones b
 
 Create vprofile.in Private Hosted zone in Route53. we will pick Default VPC in N.Virginia region.
 
-![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-%203:%20Lift%20And%20Shift%20Web%20Application%20to%20AWS/images/hostedzoneandrecords.png)
+![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-3:%20Lift%20And%20Shift%20Web%20Application%20to%20AWS/images/hostedzoneandrecords.png)
 
 Create record for each of the backend services, placing their private IP and name in the record within the created hosted zone vprofile.in. 
 These records will be used on our Tomct service in the next step
@@ -232,7 +232,7 @@ Also Add Inbound rule to vprofile-app-SG on port 22 from My IP to be able connec
     
 Again allow few minutes for the service to be provisioned.
 
-![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-%203:%20Lift%20And%20Shift%20Web%20Application%20to%20AWS/images/appserverloginand%20statuscheck.png)
+![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-3:%20Lift%20And%20Shift%20Web%20Application%20to%20AWS/images/appserverloginand%20statuscheck.png)
 
 # Step 6: Build Our Application from source code
 
@@ -273,7 +273,7 @@ Build our artifact by running the command from your root directory where the `po
 
 After a successful build we should have a Target directory in our current directory where we have our `.war` file will be found.
 
-![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-%203:%20Lift%20And%20Shift%20Web%20Application%20to%20AWS/images/Artifactbuildsuccess.png)
+![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-3:%20Lift%20And%20Shift%20Web%20Application%20to%20AWS/images/Artifactbuildsuccess.png)
 
 # Step 7 : Upload our Application to S3 bucket
 
@@ -297,9 +297,9 @@ Then verify by listing objects in the bucket or open the console to see the s3 c
     aws s3 cp vprofile-v2.war s3://vprofile-artifact-storage-tb/vprofile-v2.war
     aws s3 ls s3://vprofile-artifact-storage-tb/
 
-![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-%203:%20Lift%20And%20Shift%20Web%20Application%20to%20AWS/images/s3createdartifact.png)
+![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-3:%20Lift%20And%20Shift%20Web%20Application%20to%20AWS/images/s3createdartifact.png)
 
-![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-%203:%20Lift%20And%20Shift%20Web%20Application%20to%20AWS/images/s3createdartifactclicheck.png)
+![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-3:%20Lift%20And%20Shift%20Web%20Application%20to%20AWS/images/s3createdartifactclicheck.png)
 
 In order to upload our artifact from s3 to tomcat server, we create a role for our EC2 and attach s3fullaccess permission, 
 then attach the IAM role to vprofile-app01 instance
@@ -308,7 +308,7 @@ then attach the IAM role to vprofile-app01 instance
     Name: vprofile-artifact-storage-role
     Policy: s3FullAccess
 
-![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-%203:%20Lift%20And%20Shift%20Web%20Application%20to%20AWS/images/attachiamroletoapp01.png)
+![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-3:%20Lift%20And%20Shift%20Web%20Application%20to%20AWS/images/attachiamroletoapp01.png)
 
 
 Then connect to app01 Ubuntu server, switch to root user and verify tomcat8 is running.
@@ -317,7 +317,7 @@ Then connect to app01 Ubuntu server, switch to root user and verify tomcat8 is r
     sudo -i
     systemctl status tomcat8
 
-![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-%203:%20Lift%20And%20Shift%20Web%20Application%20to%20AWS/images/tomcatstatusrunning.png)
+![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-3:%20Lift%20And%20Shift%20Web%20Application%20to%20AWS/images/tomcatstatusrunning.png)
 
 Delete ROOT which have the default application under /var/lib/tomcat8/webapps/directory . 
 Please ensure to stop the Tomcat server deleting it. follow the command
@@ -352,7 +352,7 @@ To validate network connectivity from server install telnet.
     apt install telnet
     telnet db01.vprofile.in 3306
 
-![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-%203:%20Lift%20And%20Shift%20Web%20Application%20to%20AWS/images/telnetserviceconnitioncheckdb.png)
+![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-3:%20Lift%20And%20Shift%20Web%20Application%20to%20AWS/images/telnetserviceconnitioncheckdb.png)
 
 # Step 9: Setup ELB with HTTPS [certificate from (ACM)Amazon certificate manager
 
@@ -368,7 +368,7 @@ Navigate back to EC2 on the AWS console and to the load balancer service to setu
 
 Click next and you should have the target group created. Click on Target and then click on edit to updated the edit to add app01 instance to the registered targets and save.
 
-![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-%203:%20Lift%20And%20Shift%20Web%20Application%20to%20AWS/images/targetgroupsetup.png)
+![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-3:%20Lift%20And%20Shift%20Web%20Application%20to%20AWS/images/targetgroupsetup.png)
 
     Name: vprofile-prod-elb
     Type: Internet Facing
@@ -377,42 +377,42 @@ Click next and you should have the target group created. Click on Target and the
     Listeners: HTTP, HTTPS
     Select the certificate for HTTPS
 
-![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-%203:%20Lift%20And%20Shift%20Web%20Application%20to%20AWS/images/ELBcreatedsuccess.png)
+![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-3:%20Lift%20And%20Shift%20Web%20Application%20to%20AWS/images/ELBcreatedsuccess.png)
 
 # Step 10: Map ELB Endpoint to website name in Amazon route 53 and Verify
 
 Then create the application load balancer and copy the URL to the domain name on Route 53.
 
-![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-%203:%20Lift%20And%20Shift%20Web%20Application%20to%20AWS/images/cname4elb.png)
+![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-3:%20Lift%20And%20Shift%20Web%20Application%20to%20AWS/images/cname4elb.png)
 
 Verify you can access the application on URL setup. 
 
 https://vprofileapp.tabnob.net/login
 
-![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-%203:%20Lift%20And%20Shift%20Web%20Application%20to%20AWS/images/vprofileapplogin.png)
+![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-3:%20Lift%20And%20Shift%20Web%20Application%20to%20AWS/images/vprofileapplogin.png)
 
 Enter the login details `admin_vp` for both username and password
 
 
-![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-%203:%20Lift%20And%20Shift%20Web%20Application%20to%20AWS/images/apploginpage.png)
+![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-3:%20Lift%20And%20Shift%20Web%20Application%20to%20AWS/images/apploginpage.png)
 
 ### Verify all service 
 
 
 Rabbitmq service verification
 
-![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-%203:%20Lift%20And%20Shift%20Web%20Application%20to%20AWS/images/rabbitmqpagevalidateion.png)
+![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-3:%20Lift%20And%20Shift%20Web%20Application%20to%20AWS/images/rabbitmqpagevalidateion.png)
 
 Database service verification
 
-![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-%203:%20Lift%20And%20Shift%20Web%20Application%20to%20AWS/images/dbpagevalidation.png)
+![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-3:%20Lift%20And%20Shift%20Web%20Application%20to%20AWS/images/dbpagevalidation.png)
 
 
 Memcached service verification
 
-![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-%203:%20Lift%20And%20Shift%20Web%20Application%20to%20AWS/images/memchachepagevalidation.png)
+![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-3:%20Lift%20And%20Shift%20Web%20Application%20to%20AWS/images/memchachepagevalidation.png)
 
-![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-%203:%20Lift%20And%20Shift%20Web%20Application%20to%20AWS/images/devopspagevalidation.png)
+![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-3:%20Lift%20And%20Shift%20Web%20Application%20to%20AWS/images/devopspagevalidation.png)
 
 # Step 11: Configure Auto Scaling Group for Application Instance
 
@@ -420,7 +420,7 @@ To set up autoscaling group for tomcat EC2 instance, we will create an AMI from 
 
 The image created will be use to launch the configuration for the autoscaling group based on the AMI created.
 
-![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-%203:%20Lift%20And%20Shift%20Web%20Application%20to%20AWS/images/vprofileAMI.png)
+![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-3:%20Lift%20And%20Shift%20Web%20Application%20to%20AWS/images/vprofileAMI.png)
 
 Lunch configuration for autoscaling group
 
@@ -444,7 +444,7 @@ Create our ASG.
 
 Terminate the existing app instance, ASG will create a new one using Lunch configuration we created.
 
-![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-%203:%20Lift%20And%20Shift%20Web%20Application%20to%20AWS/images/ASG.png)
+![](https://github.com/Adutoby/DevOps-Projects-AWS/blob/master/Project-3:%20Lift%20And%20Shift%20Web%20Application%20to%20AWS/images/ASG.png)
 
 Validate login, check all services again 
 ### Ensure to delete all the instances once you are done to avoid cost.
