@@ -399,4 +399,4 @@ Ensure to do these steps if you have more than 1 instance set as minimum instanc
 
 **Congratulation!!!** making it to the end. 
 I hope the work through was insightful and you hard fun completing the project. 
-Lets connect on LinkedIn HERE.
+Lets connect on LinkedIn [HERE](https://www.linkedin.com/in/oluwatobiloba-adu/).
